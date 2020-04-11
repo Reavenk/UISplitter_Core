@@ -1,4 +1,13 @@
-﻿using System.Collections;
+﻿// <copyright file="Sash.cs" company="Pixel Precision LLC">
+// Copyright (c) 2020 All Rights Reserved
+// </copyright>
+// <author>William Leu</author>
+// <date>04/11/2020</date>
+// <summary>
+// The sash for the UIUtils.Splitter class.
+// </summary>
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,12 +15,29 @@ namespace PxPre
 { 
     namespace UIUtils
     { 
+        /// <summary>
+        /// The sash for the UIUtils.Splitter class.
+        /// 
+        /// It's main job is to detect and handle mouse drag operations.
+        /// </summary>
         public class SplitterSash : 
             UnityEngine.UI.Image,
             UnityEngine.EventSystems.IDragHandler
         { 
+            /// <summary>
+            /// The parent class. Used to get the splitter properties, and to
+            /// signal the parent of changes that occured within the sash.
+            /// </summary>
             public Splitter parent;
+
+            /// <summary>
+            /// The left/top pane.
+            /// </summary>
             public RectTransform paneA;
+
+            /// <summary>
+            /// The right/bottom pane.
+            /// </summary>
             public RectTransform paneB;
 
             void UnityEngine.EventSystems.IDragHandler.OnDrag(
@@ -39,7 +65,11 @@ namespace PxPre
                 // I don't also want to throw the sign of the grain (how positive
                 // Y is up, instead of the more convenient down direction) into 
                 // the mix.
-                if(vidx == 0)
+                //
+                //      HORIZONTAL HANDLER
+                //
+                //////////////////////////////////////////////////
+                if (vidx == 0)
                 { 
                     if(delta < 0.0f)
                     { 
@@ -63,7 +93,9 @@ namespace PxPre
                             this.rectTransform.anchoredPosition.x + delta, 
                             this.rectTransform.anchoredPosition.y);
                 }
-                // Veritical handler
+                //      VERTICAL HANDLER
+                //
+                //////////////////////////////////////////////////
                 else
                 { 
                     if(delta < 0.0f)
