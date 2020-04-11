@@ -51,6 +51,8 @@ namespace PxPre
                 if(this.splitGrain == SplitGrain.Vertical)
                     idx = 1;
 
+                this.rectTransform.pivot = new Vector2(0.0f, 1.0f);
+
                 if(this.panes != null)
                 { 
                     foreach(RectTransform rt in this.panes)
