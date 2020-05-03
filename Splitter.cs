@@ -64,6 +64,13 @@ namespace PxPre
                 }
             }
 
+            [System.Serializable]
+            public struct PropPlatformGroup
+            {
+                public List<UnityEngine.RuntimePlatform> platforms;
+                public SplitterProps prop;
+            }
+
             /// <summary>
             /// Cached RectTransform in the GameObject.
             /// </summary>
@@ -92,6 +99,7 @@ namespace PxPre
             /// </summary>
             public SplitGrain splitGrain = SplitGrain.Horizontal;
              
+            public List<PropPlatformGroup> propsByPlatform;
 
             /// <summary>
             /// The sharable properties of the splitter. Cannot be null.
@@ -106,6 +114,21 @@ namespace PxPre
 
             void Awake()
             { 
+                if(this.propsByPlatform != null)
+                { 
+                    foreach(PropPlatformGroup ppg in this.propsByPlatform)
+                    { 
+                        if(ppg.platforms == null || ppg.prop == null)
+                            continue;
+
+                        if(ppg.platforms.Contains(UnityEngine.Application.platform) == true)
+                        {
+                            this.props = ppg.prop;
+                            break;
+                        }
+                    }
+                }
+
                 this.rectTransform = this.GetComponent<RectTransform>();
 
                 this.rectTransform.pivot = new Vector2(0.0f, 1.0f);
