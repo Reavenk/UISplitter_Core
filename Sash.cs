@@ -84,6 +84,8 @@ namespace PxPre
                     if(delta == 0.0f)
                         return;
 
+                    delta /= this.transform.lossyScale.x;
+
                     paneA.sizeDelta = new Vector2(paneA.sizeDelta.x + delta, paneA.sizeDelta.y);
                     paneB.anchoredPosition = new Vector2(paneB.anchoredPosition.x + delta, paneB.anchoredPosition.y);
                     paneB.sizeDelta = new Vector2(paneB.sizeDelta.x - delta, paneB.sizeDelta.y);
@@ -110,6 +112,8 @@ namespace PxPre
                     }
                     if(delta == 0.0f)
                         return;
+
+                    delta /= this.transform.lossyScale.y;
 
                     paneA.sizeDelta = new Vector2(paneA.sizeDelta.x, paneA.sizeDelta.y - delta);
                     paneB.anchoredPosition = new Vector2(paneB.anchoredPosition.x, paneB.anchoredPosition.y + delta);
