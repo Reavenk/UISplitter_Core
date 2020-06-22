@@ -249,9 +249,36 @@ namespace PxPre
                     GameObject goSplitter = new GameObject("_Splitter");
                     SplitterSash imgSplitter = goSplitter.AddComponent<SplitterSash>();
                     goSplitter.transform.SetParent(this.transform);
-                    imgSplitter.sprite = this.props.spriteHoriz;
+
+                    Sprite thumbSprite = null;
+                    if(this.splitGrain == SplitGrain.Horizontal)
+                    {
+                        imgSplitter.sprite = this.props.spriteHoriz;
+                        thumbSprite = this.props.spriteThumbHoriz;
+                    }
+                    else
+                    {
+                        imgSplitter.sprite = this.props.spriteVert;
+                        thumbSprite = this.props.spriteThumbVert;
+                    }
+
                     imgSplitter.type = UnityEngine.UI.Image.Type.Sliced;
                     this.PrepareAsChild(imgSplitter.rectTransform);
+
+                    if(thumbSprite != null)
+                    { 
+                        GameObject goThumbSprite = new GameObject("ThumbSprite");
+                        goThumbSprite.transform.SetParent(goSplitter.transform, false);
+                        UnityEngine.UI.Image imgThumbSprite = goThumbSprite.AddComponent<UnityEngine.UI.Image>();
+                        imgThumbSprite.sprite = thumbSprite;
+                        imgThumbSprite.color = this.props.thumbSpriteColor;
+                        RectTransform rtThumbSprite = imgThumbSprite.rectTransform;
+                        rtThumbSprite.anchorMin = new Vector2(0.5f, 0.5f);
+                        rtThumbSprite.anchorMax = new Vector2(0.5f, 0.5f);
+                        rtThumbSprite.pivot = new Vector2(0.5f, 0.5f);
+                        rtThumbSprite.anchoredPosition = Vector2.zero;
+                        rtThumbSprite.sizeDelta = thumbSprite.rect.size;
+                    }
 
                     imgSplitter.paneA = this.panes[i];
                     imgSplitter.paneB = this.panes[i + 1];

@@ -34,6 +34,20 @@ namespace PxPre
             public Sprite spriteVert;  // Only applies to things split vertically
 
             /// <summary>
+            /// Optional sprite that appears in the middle of the thumb when split 
+            /// horizontally
+            /// </summary>
+            public Sprite spriteThumbHoriz;
+
+            /// <summary>
+            /// Optional sprite that appears in the middle of the thumb when split 
+            /// vertically.
+            /// </summary>
+            public Sprite spriteThumbVert;
+
+            public Color thumbSpriteColor = Color.white;
+
+            /// <summary>
             /// The dimensions of the sash. The x component is the size for horizontal
             /// splitters, and the y component is the size for vertical spliters. The x
             /// and the y components will be the same more-often-than-not.
