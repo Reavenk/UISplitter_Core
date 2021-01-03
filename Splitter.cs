@@ -423,6 +423,17 @@ namespace PxPre
                             }
                         }
                     }
+                    else if(total != 0.0f && total < availWOSashes)
+                    { 
+                        // If we don't have anything larger than anything else, then we scale
+                        // everything up evenly.
+                        //
+                        // This edge case especially needs handling if we start the app with multiple
+                        // children that are exactly the minimum size.
+                        float scaleUp = availTotalSize / total;
+                        foreach (RectTransform rtKey in this.panes)
+                            this.rectSizes[rtKey] *= scaleUp;
+                    }
                 }
 
                 if(total == 0.0f)
