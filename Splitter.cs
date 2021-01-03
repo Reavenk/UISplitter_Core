@@ -291,6 +291,43 @@ namespace PxPre
             }
 
             /// <summary>
+            /// Try to set the pane distribution to a certain percent.
+            /// </summary>
+            /// <param name="f">
+            /// The percent of the left pan - with 0.0 being nothing, and 1,0 being everything. This
+            /// is merely the requested value, alignment and layout rules may override this value.</param>
+            /// <remarks>Only works for single sash splitters.</remarks>
+            public bool SetPercent(float f)
+            { 
+                f = Mathf.Clamp01(f);
+                if(this.panes.Count != 2)
+                    return false;
+
+                Vector2 dim = this.rectTransform.rect.size;
+
+                if (this.splitGrain == SplitGrain.Horizontal)
+                { 
+                    this.panes[0].sizeDelta = new Vector2(f * dim.x, dim.y);
+                    this.panes[1].sizeDelta = new Vector2((1.0f - f) * dim.x, dim.y);
+
+                    this.rectSizes[this.panes[0]] = f * dim.x;
+                    this.rectSizes[this.panes[1]] = (1.0f - f) * dim.x;
+                }
+                else
+                {
+                    this.panes[0].sizeDelta = new Vector2(dim.x, f * dim.y);
+                    this.panes[1].sizeDelta = new Vector2(dim.x, (1.0f - f) * dim.y);
+
+                    this.rectSizes[this.panes[0]] = f * dim.y;
+                    this.rectSizes[this.panes[1]] = (1.0f - f) * dim.y;
+                }
+
+                this.UpdateAlignment();
+
+                return true;
+            }
+
+            /// <summary>
             /// Update all the panes and sashes. This is often done when the splitter's 
             /// dimensions have changed, or a new pane layout is created.
             /// </summary>
