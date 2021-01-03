@@ -433,9 +433,14 @@ namespace PxPre
                     // We can't use the minsize, because we're most likely here because
                     // we didn't even have the space for minsize.
                     float avgSize = availWOSashes / total;
-                    foreach(RectTransform rt in this.rectSizes.Keys)
+
+                    // Modifying the values changes the container which screws up iteration
+                    // if we don't make a copy.
+                    List<RectTransform> rts = new List<RectTransform>(this.rectSizes.Keys);
+                    foreach(RectTransform rt in rts)
                         this.rectSizes[rt] = avgSize;
                 }
+
                
                 int other = (idx == 0) ? 1 : 0;
                 float sign = 1.0f;
