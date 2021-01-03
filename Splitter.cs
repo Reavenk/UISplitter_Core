@@ -248,6 +248,7 @@ namespace PxPre
 
                     GameObject goSplitter = new GameObject("_Splitter");
                     SplitterSash imgSplitter = goSplitter.AddComponent<SplitterSash>();
+                    imgSplitter.color = this.props.sashColor;
                     goSplitter.transform.SetParent(this.transform);
 
                     Sprite thumbSprite = null;
