@@ -441,7 +441,7 @@ namespace PxPre.UIUtils
                 //
                 // We can't use the minsize, because we're most likely here because
                 // we didn't even have the space for minsize.
-                float avgSize = availWOSashes / total;
+                float avgSize = availWOSashes / (float)this.rectSizes.Count;
 
                 // Modifying the values changes the container which screws up iteration
                 // if we don't make a copy.
