@@ -428,7 +428,7 @@ namespace PxPre.UIUtils
                     //
                     // This edge case especially needs handling if we start the app with multiple
                     // children that are exactly the minimum size.
-                    float scaleUp = availTotalSize / total;
+                    float scaleUp = availWOSashes / total;
                     foreach (RectTransform rtKey in this.panes)
                         this.rectSizes[rtKey] *= scaleUp;
                 }
